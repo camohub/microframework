@@ -1,6 +1,7 @@
 <?php
 
-
+require_once(__DIR__ . '/baseConfig.php');
+require_once(__DIR__ . '/../config.php');
 require_once(__DIR__ . '/router.php');
 require_once(__DIR__ . '/controllers/BaseController.php');
 
@@ -8,6 +9,8 @@ require_once(__DIR__ . '/controllers/BaseController.php');
 class Application
 {
 	protected $path;
+
+	public $config;
 
 	protected $router;
 
@@ -24,6 +27,7 @@ class Application
 
 	protected function setEnv()
 	{
+		$this->config = new Config();
 		$this->router = new Router();
 		$this->path = $this->getPath();
 	}

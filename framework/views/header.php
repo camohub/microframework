@@ -14,13 +14,20 @@
 	</style>
 </head>
 <body>
-<div class="container-fluid header">
-	<div class="row">
-		<h1 class="col-12">Websupport DNS</h1>
+<div class="header">
+	<div class="container">
+		<div class="row">
+			<h1 class="col-12">Websupport DNS</h1>
+		</div>
 	</div>
-	<div class="row">
-		<div class="col-12 top-menu">
-			menuuuuuuuu
+	<div class="top-menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 top-menu">
+					<a href="<?php echo $basePath ?>">Home</a>
+					<a href="<?php echo $basePath ?>/xxxxxx">Xxxxx</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
