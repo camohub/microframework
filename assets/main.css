@@ -5,8 +5,14 @@
 	margin-bottom: 25px;
 }
 
-.header .top-menu {
+.top-menu {
 	background-color: #444;
 	padding-top: 7px;
 	padding-bottom: 7px;
+}
+
+.top-menu a {
+	display: inline-block;
+	color: #fff;
+	padding-right: 10px;
 }
