@@ -1,11 +1,11 @@
 <?php
 
-class DefaultController
+class DefaultController extends BaseController
 {
 
 	public function index()
 	{
-		return 'DefaultControllerrrrrrrrrrrrrrrrrrrr';
+		$this->setView('default/index.php', ['data' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa']);
 	}
 
 

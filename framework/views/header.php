@@ -8,7 +8,19 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<title>Hello, world!</title>
+	<title></title>
+	<style>
+		<?php require_once(__DIR__ . '/../../assets/main.css'); ?>
+	</style>
 </head>
 <body>
-<h1>Hello, world!</h1>
+<div class="container-fluid header">
+	<div class="row">
+		<h1 class="col-12">Websupport DNS</h1>
+	</div>
+	<div class="row">
+		<div class="col-12 top-menu">
+			menuuuuuuuu
+		</div>
+	</div>
+</div>

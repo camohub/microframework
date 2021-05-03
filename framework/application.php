@@ -2,6 +2,7 @@
 
 
 require_once(__DIR__ . '/router.php');
+require_once(__DIR__ . '/controllers/BaseController.php');
 
 
 class Application
@@ -13,16 +14,10 @@ class Application
 	protected $controller;
 
 
-	public function __construct()
-	{
-		$this->setEnv();
-	}
-
-
 	public function run()
 	{
-		$data = $this->getControllerData();
-		var_dump($data);
+		$this->setEnv();
+		$this->callControllerAction($this->path);
 	}
 
 
@@ -34,25 +29,25 @@ class Application
 	}
 
 
-	protected function getControllerData()
+	protected function callControllerAction($path)
 	{
-		if( empty($this->path) )
+		if( empty($path) )
 		{
 			require_once(__DIR__ . '/controllers/DefaultController.php');
-			return new DefaultController();
+			return (new DefaultController())->index();
 		}
-		elseif ( !array_key_exists($this->path, $this->router->paths) )
+		elseif ( array_key_exists($path, $this->router->paths) )
 		{
-			throw new Exception('Action not found!', 404);
-		}
-		else
-		{
-			$controller = $this->router->getControllerName($this->path);
-			$action = $this->router->getActionName($this->path);
+			$controller = $this->router->getControllerName($path);
+			$action = $this->router->getActionName($path);
 
 			require_once(__DIR__ . '/controllers/' . $controller . '.php');
 
 			return (new $controller())->$action();
+		}
+		else
+		{
+			throw new Exception('Action not found!', 404);
 		}
 	}
 
