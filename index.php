@@ -1,6 +1,10 @@
 <?php
 
-require_once('router.php');
+session_start();
 
-require_once('');
+require_once(__DIR__ . '/framework/application.php');
+
+$application = new Application();
+$application->run();
+
 
