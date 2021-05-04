@@ -13,10 +13,15 @@ class BaseController
 	}
 
 
+	/**
+	 * Make variables available in template then include temlate file
+	 */
 	protected function setView($path, $data = [])
 	{
 		foreach ($data as $k => $v) $$k = $v;
 
+		$di = $this->di;
+		$sessionService = $this->di->getService('SessionService');
 		$basePath = $this->di->getService('Config')->basePath;
 
 		require_once(__DIR__ . '/../views/' . $path);

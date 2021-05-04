@@ -8,6 +8,7 @@ class Router
 		'' => 'DefaultController@index',
 		'login' => 'LoginController@index',
 		'login/submit' => 'LoginController@submit',
+		'logout' => 'LoginController@logout',
 	];
 
 

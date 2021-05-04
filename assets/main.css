@@ -21,6 +21,23 @@ label {
 	font-weight: bold;
 }
 
+#alerts-wrapper {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 350px;
+}
+
+.alert-danger {
+	background-color: #b2111f;
+	color: #fff !important;
+}
+
+.alert-success {
+	background-color: #007d1c;
+	color: #fff !important;
+}
+
 .pb-50 { padding-bottom: 50px !important; }
 .pb-25 { padding-bottom: 25px !important; }
 

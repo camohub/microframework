@@ -43,4 +43,12 @@ class LoginController extends BaseController
 		$this->sessionService->setFlash('Boli ste prihlásený');
 		$this->redirect($this->di->getService('Config')->basePath);
 	}
+
+
+	public function logout()
+	{
+		$this->sessionService->forget('login');
+		$this->sessionService->setFlash('Boli ste odhlásený.');
+		$this->redirect($this->di->getService('Config')->basePath);
+	}
 }
