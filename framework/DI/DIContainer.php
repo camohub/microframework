@@ -29,8 +29,9 @@ class DIContainer
 		'LoginController' => '/controllers/LoginController.php',
 
 		// Model
+		'SessionService' => '/model/services/SessionService.php',
 		'LoginService' => '/model/services/LoginService.php',
-		'LoginValidator' => '/model/validators/LoginValidator'
+		'LoginValidator' => '/model/validators/LoginValidator.php',
 	];
 
 

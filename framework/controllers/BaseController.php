@@ -15,8 +15,17 @@ class BaseController
 
 	protected function setView($path, $data = [])
 	{
-		$basePath = $GLOBALS['application']->config->basePath;
+		foreach ($data as $k => $v) $$k = $v;
+
+		$basePath = $this->di->getService('Config')->basePath;
+
 		require_once(__DIR__ . '/../views/' . $path);
+	}
+
+
+	protected function redirect($location, $code = 0)
+	{
+		header('Location: ' . $location, $code);
 	}
 
 }

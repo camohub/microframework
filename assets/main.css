@@ -21,7 +21,9 @@ label {
 	font-weight: bold;
 }
 
-.pb-50 { padding-bottom: 50px; }
-.pb-25 { padding-bottom: 25px; }
+.pb-50 { padding-bottom: 50px !important; }
+.pb-25 { padding-bottom: 25px !important; }
 
-.pt-50 { padding-top: 50px; }
+.pt-50 { padding-top: 50px !important; }
+
+.mb-15 { margin-bottom: 15px !important; }

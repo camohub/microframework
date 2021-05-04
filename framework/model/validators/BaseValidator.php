@@ -3,18 +3,20 @@
 
 class BaseValidator
 {
-	protected $diContainer;
+	protected $di;
 
 	protected $post;
 
 	protected $rawPost;
 
+	public $errors = [];
 
-	public function __construct(DIContainer $diContainer)
+
+	public function __construct()
 	{
-		$this->diContainer = $diContainer;
+		$this->di = DIContainer::getContainer();
 		$this->rawPost = $_POST;
 
-		foreach ($_POST as $k => $v) $_POST[$k] = trim($v);
+		foreach ($_POST as $k => $v) $this->post[$k] = trim($v);
 	}
 }

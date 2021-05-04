@@ -7,6 +7,9 @@
 	</div>
 	<div class="row">
 		<form action="<?php echo $basePath ?>/login/submit" method="post" class="col-12 offset-md-3 col-md-6">
+
+			<?php include(__DIR__ . '/../partials/formErrors.php') ?>
+
 			<div class="form-group">
 				<label for="name">Meno</label>
 				<input type="text" name="name" class="form-control">
