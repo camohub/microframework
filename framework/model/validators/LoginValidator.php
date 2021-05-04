@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 class LoginValidator extends BaseValidator
 {
 
@@ -21,7 +19,7 @@ class LoginValidator extends BaseValidator
 
 		if( $p['name'] == $conf->loginName && $p['password'] == $conf->loginPassword ) return TRUE;
 
-		$this->errors['invalidCredentilas'] = 'Neplatné meno alebo heslo.';
+		$this->errors['invalidCredentials'] = 'Neplatné meno alebo heslo.';
 		return FALSE;
 	}
 

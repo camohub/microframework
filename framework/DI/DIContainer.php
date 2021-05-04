@@ -8,11 +8,14 @@ class DIContainer
 
 	/**
 	 * __construct calls require_once for all $baseServices.
+	 * Other services are included only if needed.
 	 */
 	protected $baseServices = [
+		'/../helpers.php',
 		'/baseConfig.php',
 		'/controllers/BaseController.php',
 		'/model/validators/BaseValidator.php',
+		'/model/services/ApiBaseService.php',
 	];
 
 
@@ -30,11 +33,10 @@ class DIContainer
 
 		// Model
 		'SessionService' => '/model/services/SessionService.php',
-		'LoginService' => '/model/services/LoginService.php',
 		'LoginValidator' => '/model/validators/LoginValidator.php',
 
 		// Model API
-		'ApiAuthService' => '/model/services/ApiAuthService.php',
+		'ApiZonesService' => '/model/services/ApiZonesService.php',
 	];
 
 
@@ -53,7 +55,7 @@ class DIContainer
 
 	public function getService($name)
 	{
-		if( !array_key_exists($name, $this->services) ) throw new Exception('DIContainer error. Service name ' . $name . ' is not registerd.', 500);
+		if( !array_key_exists($name, $this->services) ) throw new Exception('DIContainer error. Service name ' . $name . ' is not registered.', 500);
 
 		if( is_object($this->services[$name]) ) return $this->services[$name];
 

@@ -6,9 +6,6 @@ class LoginController extends BaseController
 
 	public static $sessKey = self::class;
 
-	/** @var LoginService */
-	protected $loginService;
-
 	/** @var LoginValidator */
 	protected $loginValidator;
 
@@ -20,7 +17,6 @@ class LoginController extends BaseController
 	{
 		parent::__construct();
 		$this->loginValidator = $this->di->getService('LoginValidator');
-		$this->loginService = $this->di->getService('LoginService');
 		$this->sessionService = $this->di->getService('SessionService');
 	}
 
