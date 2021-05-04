@@ -25,7 +25,7 @@
 			<div class="row">
 				<div class="col-12 top-menu">
 					<a href="<?php echo $basePath ?>">Home</a>
-					<a href="<?php echo $basePath ?>/xxxxxx">Xxxxx</a>
+					<a href="<?php echo $basePath ?>/login">Prihlásenie</a>
 				</div>
 			</div>
 		</div>

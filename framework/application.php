@@ -1,9 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/baseConfig.php');
-require_once(__DIR__ . '/../config.php');
-require_once(__DIR__ . '/router.php');
-require_once(__DIR__ . '/controllers/BaseController.php');
+require_once(__DIR__ . '/DI/DIContainer.php');
 
 
 class Application
@@ -11,6 +8,8 @@ class Application
 	protected $path;
 
 	public $config;
+
+	public $diContainer;
 
 	protected $router;
 
@@ -27,8 +26,9 @@ class Application
 
 	protected function setEnv()
 	{
-		$this->config = new Config();
-		$this->router = new Router();
+		$this->diContainer = DIContainer::getContainer();
+		$this->config = $this->diContainer->getService('Config');
+		$this->router = $this->diContainer->getService('Router');
 		$this->path = $this->getPath();
 	}
 
@@ -37,17 +37,14 @@ class Application
 	{
 		if( empty($path) )
 		{
-			require_once(__DIR__ . '/controllers/DefaultController.php');
-			return (new DefaultController())->index();
+			return $this->diContainer->getService('DefaultController')->index();
 		}
 		elseif ( array_key_exists($path, $this->router->paths) )
 		{
 			$controller = $this->router->getControllerName($path);
 			$action = $this->router->getActionName($path);
 
-			require_once(__DIR__ . '/controllers/' . $controller . '.php');
-
-			return (new $controller())->$action();
+			return $this->diContainer->getService($controller)->$action();
 		}
 		else
 		{

@@ -6,7 +6,8 @@ class Router
 
 	public $paths = [
 		'' => 'DefaultController@index',
-		'aaa/bbb' => 'AController@bbb',
+		'login' => 'LoginController@index',
+		'login/submit' => 'LoginController@submit',
 	];
 
 
