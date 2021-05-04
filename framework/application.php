@@ -7,11 +7,17 @@ class Application
 {
 	protected $path;
 
+	/** @var  Config */
 	public $config;
 
-	public $diContainer;
+	/** @var  DIContainer */
+	public $di;
 
+	/** @var  Router */
 	protected $router;
+
+	/** @var  SessionService */
+	protected $sessionService;
 
 	protected $controller;
 
@@ -26,30 +32,32 @@ class Application
 
 	protected function setEnv()
 	{
-		$this->diContainer = DIContainer::getContainer();
-		$this->config = $this->diContainer->getService('Config');
-		$this->router = $this->diContainer->getService('Router');
+		$this->di = DIContainer::getContainer();
+		$this->config = $this->di->getService('Config');
+		$this->router = $this->di->getService('Router');
+		$this->sessionService = $this->di->getService('SessionService');
 		$this->path = $this->getPath();
 	}
 
 
 	protected function callControllerAction($path)
 	{
-		if( empty($path) )
-		{
-			return $this->diContainer->getService('DefaultController')->index();
-		}
-		elseif ( array_key_exists($path, $this->router->paths) )
-		{
-			$controller = $this->router->getControllerName($path);
-			$action = $this->router->getActionName($path);
+		if( !array_key_exists($path, $this->router->paths) ) throw new Exception('Action not found!', 404);
 
-			return $this->diContainer->getService($controller)->$action();
-		}
-		else
+		$controller = $this->router->getControllerName($path);
+		$action = $this->router->getActionName($path);
+
+		if( !$this->sessionService->get('login') && $controller != 'LoginController')  // Check name because LoginController::submit has not session set yet.
 		{
-			throw new Exception('Action not found!', 404);
+			return $this->di->getService('LoginController')->index();
 		}
+		elseif( empty($path) )
+		{
+			return $this->di->getService('DefaultController')->index();
+		}
+
+		return $this->di->getService($controller)->$action();
+
 	}
 
 

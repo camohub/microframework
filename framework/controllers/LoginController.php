@@ -39,6 +39,7 @@ class LoginController extends BaseController
 			return;
 		}
 
+		$this->sessionService->set('login', TRUE);
 		$this->sessionService->setFlash('Boli ste prihlásený');
 		$this->redirect($this->di->getService('Config')->basePath);
 	}
