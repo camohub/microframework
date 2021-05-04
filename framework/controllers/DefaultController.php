@@ -5,7 +5,7 @@ class DefaultController extends BaseController
 
 	public function index()
 	{
-		$this->setView('default/index.php', ['data' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa']);
+		$this->setView('default/index.php', []);
 	}
 
 

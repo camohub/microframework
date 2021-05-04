@@ -32,6 +32,9 @@ class DIContainer
 		'SessionService' => '/model/services/SessionService.php',
 		'LoginService' => '/model/services/LoginService.php',
 		'LoginValidator' => '/model/validators/LoginValidator.php',
+
+		// Model API
+		'ApiAuthService' => '/model/services/ApiAuthService.php',
 	];
 
 
