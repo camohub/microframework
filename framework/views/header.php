@@ -32,10 +32,4 @@
 	</div>
 </div>
 
-<?php
-	$flashes = DIContainer::getContainer()->getService('SessionService')->getFlashes();
-	foreach ($flashes as $f)
-	{
-		echo '<div class="alert alert-' . $f[1]. '">' . $f[0] . '</div>';
-	}
-?>
+<?php include(__DIR__ . '/partials/flashes.php'); ?>
