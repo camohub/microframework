@@ -16,6 +16,14 @@ class SessionService
 	}
 
 
+	public function getAndForget($key)
+	{
+		$val = $_SESSION[$key] ?? NULL;
+		$this->forget($key);
+		return $val;
+	}
+
+
 	public function forget($key)
 	{
 		unset($_SESSION[$key]);
