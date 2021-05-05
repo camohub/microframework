@@ -55,11 +55,11 @@
 		</div>
 	<?php endif; ?>
 
-	<div class="row">
+	<!--<div class="row">
 		<div class="col">
-			<?php foreach ($response->items as $i) dump((array)$i) ?>
+			<?php /*foreach ($response->items as $i) dump((array)$i) */?>
 		</div>
-	</div>
+	</div>-->
 </div>
 
 

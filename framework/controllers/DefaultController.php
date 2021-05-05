@@ -120,7 +120,7 @@ class DefaultController extends BaseController
 		if( isset($response->status) && $response->status == 'success' ) $this->sessionService->setFlash('Záznam bol zmazaný.');
 		else $this->sessionService->setFlash('Pri mazaní záznamu došlo k chybe.', 'danger');
 
-		$this->redirect("{$this->config->basePath}/show-records?domain=$domain");
+		$this->redirect("{$this->config->basePath}/default/show-records?domain=$domain");
 	}
 
 

@@ -11,7 +11,6 @@ class ApiDnsService extends ApiBaseService
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, sprintf('%s%s', self::API_URL, $path));
-
 		$this->setBaseOptions($ch, $path, self::GET);
 
 		$response = curl_exec($ch);
@@ -27,7 +26,6 @@ class ApiDnsService extends ApiBaseService
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, sprintf('%s%s', self::API_URL, $path));
-
 		$this->setBaseOptions($ch, $path, self::GET);
 
 		$response = curl_exec($ch);
@@ -43,7 +41,6 @@ class ApiDnsService extends ApiBaseService
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, sprintf('%s%s', self::API_URL, $path));
-
 		$this->setBaseOptions($ch, $path, self::POST, ['Content-Type:application/json']);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
@@ -60,7 +57,7 @@ class ApiDnsService extends ApiBaseService
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, sprintf('%s%s', self::API_URL, $path));
-
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::DELETE);
 		$this->setBaseOptions($ch, $path, self::DELETE);
 
 		$response = curl_exec($ch);

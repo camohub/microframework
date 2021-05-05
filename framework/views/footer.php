@@ -11,6 +11,6 @@
 		<?php require_once(__DIR__ . '/../../assets/main.js'); ?>
 	</script>
 
-	<div id="footer"></div>
+	<div id="footer" class="text-center">vladimir.camaj@gmail.com</div>
 </body>
 </html>
