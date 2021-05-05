@@ -40,6 +40,7 @@ class BaseController
 	protected function redirect($location, $code = 0)
 	{
 		header('Location: ' . $location, $code);
+		exit();
 	}
 
 }

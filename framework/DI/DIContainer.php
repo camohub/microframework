@@ -33,10 +33,14 @@ class DIContainer
 
 		// Model
 		'SessionService' => '/model/services/SessionService.php',
+
+		// Model validators
 		'LoginValidator' => '/model/validators/LoginValidator.php',
+		'DomainValidator' => '/model/validators/DomainValidator.php',
 
 		// Model API
 		'ApiZonesService' => '/model/services/ApiZonesService.php',
+		'ApiDnsService' => '/model/services/ApiDnsService.php',
 	];
 
 

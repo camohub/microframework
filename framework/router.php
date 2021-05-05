@@ -6,6 +6,9 @@ class Router
 
 	public $paths = [
 		'' => 'DefaultController@index',
+		'default/show-records' => 'DefaultController@showRecords',
+		'default/show-record' => 'DefaultController@showOneRecord',
+		'default/delete-record' => 'DefaultController@deleteRecord',
 		'login' => 'LoginController@index',
 		'login/submit' => 'LoginController@submit',
 		'logout' => 'LoginController@logout',

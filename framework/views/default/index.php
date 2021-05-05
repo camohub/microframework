@@ -3,42 +3,20 @@
 
 <div class="container">
 	<div class="row pb-25">
-		<h1 class="col-12">Zóny</h1>
+		<h2 class="col-12">DNS záznamy</h2>
 	</div>
-
-	<?php if( $response->code > 299 ): ?>
-		<div class="row">
-			<div class="col text-danger">
-				Pri spracovaní requestu došlo k chybe.
-			</div>
-		</div>
-	<?php elseif( $response !== FALSE && !empty($response->items) ): ?>
-		<table class="table table-bordered table-hover table-striped table-responsive">
-			<thead class="thead-dark">
-				<tr>
-					<td class="">#</td>
-					<td class="col-9">Name</td>
-					<td class="col-9">Action</td>
-				</tr>
-			</thead>
-
-			<?php foreach ($response->items as $zone): ?>
-				<tr>
-					<td><?php echo $zone->id ?></td>
-					<td style="white-space: pre"><?php echo $zone->name ?></td>
-					<td></td>
-				</tr>
-			<?php endforeach; ?>
-		</table>
-	<?php else: ?>
-		<div class="row">
-			<div class="col">Nenašli sa žiadne záznamy.</div>
-		</div>
-	<?php endif; ?>
 
 	<div class="row">
 		<div class="col">
-			<?php dump($response) ?>
+			<div class="mb-15"><b>Vyberte doménu</b></div>
+
+			<?php include(__DIR__ . '/../partials/formErrors.php') ?>
+
+			<?php foreach ($domains as $d): ?>
+				<div>
+					<a href="<?php echo $basePath ?>/default/show-records?domain=<?php echo $d; ?>"><?php echo $d ?></a>
+				</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </div>

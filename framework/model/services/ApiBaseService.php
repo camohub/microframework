@@ -9,6 +9,9 @@ class ApiBaseService
 	const PUT = 'PUT';
 	const DELETE = 'DELETE';
 
+	const RECORD_TYPES = [
+		'A', 'AAAA', 'MX', 'ANAME', 'CNAME', 'NS', 'TXT', 'SRV'
+	];
 
 	const API_URL = 'https://rest.websupport.sk';
 
@@ -53,16 +56,22 @@ class ApiBaseService
 	/**
 	 * json_decode + curl_getinfo
 	 */
-	protected function createResponse($response, $ch)
+	protected function createResponse($response, $ch, $addInfo = FALSE)
 	{
 		$response = json_decode($response);
 		$info = curl_getinfo($ch);
 		curl_close($ch);
 
 		$response->code = $info['http_code'];
-		$response->curl_info = $info;  // Debug info
+		if( $addInfo ) $response->curl_info = $info;  // Debug info
 
 		return $response;
+	}
+
+
+	public function getAllTypes()
+	{
+		return self::RECORD_TYPES;
 	}
 
 
