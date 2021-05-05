@@ -43,7 +43,7 @@
 						foreach ($keys as $key): echo "<td>" . ($item->$key ?? '') . "</td>"; endforeach;
 					?>
 					<td class="">
-						<a href="<?php echo "$basePath/default/show-record?domain=$domain&amp;id=$item->id"; ?>">edit</a>
+						<a href="<?php echo "$basePath/default/update-record?domain=$domain&amp;id=$item->id"; ?>">edit</a>
 						<a class="delete text-danger" href="<?php echo "$basePath/default/delete-record?domain=$domain&amp;id=$item->id"; ?>">delete</a>
 					</td>
 				</tr>

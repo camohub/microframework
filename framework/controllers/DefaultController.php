@@ -1,5 +1,6 @@
 <?php
 
+
 class DefaultController extends BaseController
 {
 
@@ -35,6 +36,9 @@ class DefaultController extends BaseController
 	{
 		$this->validateRequest();
 
+		dump($this->sessionService->getAndForget('a'));
+		dump($this->sessionService->getAndForget('b'));
+
 		$domain = $this->domainValidator->get['domain'];
 
 		$response = $this->apiDnsService->getAllRecords($domain);
@@ -46,7 +50,7 @@ class DefaultController extends BaseController
 	}
 
 
-	public function showOneRecord()
+	/*public function showOneRecord()
 	{
 		$this->validateRequest();
 
@@ -59,15 +63,13 @@ class DefaultController extends BaseController
 			'domain' => $domain,
 			'response' => $response
 		]);
-	}
+	}*/
 
 
 	public function createRecord()
 	{
 		$this->validateRequest();
 
-		//dump($this->sessionService->getAndForget('a'));
-		//dump($this->sessionService->getAndForget('b'));
 		$domain = $this->domainValidator->get['domain'];
 
 		$this->setView('/default/createRecord.php', [
@@ -85,8 +87,6 @@ class DefaultController extends BaseController
 		$data = $this->dnsRecordValidator->post;
 
 		$response = $this->apiDnsService->createRecord($domain, $data);
-		//$this->sessionService->set('a', $response);
-		//$this->sessionService->set('b', $data);
 
 		if( isset($response->errors) && get_object_vars($response->errors) )  // Has to be cast to array for empty test.
 		{
@@ -105,6 +105,60 @@ class DefaultController extends BaseController
 
 		$basePath = $this->config->basePath;
 		$this->redirect("$basePath/default/show-records?domain=$domain");
+	}
+
+
+	public function updateRecord()
+	{
+		$this->validateRequest();
+
+		$domain = $this->domainValidator->get['domain'];
+		dump($_GET);
+		$id = $this->domainValidator->get['id'];
+
+		$response = $this->apiDnsService->getOneRecord($id, $domain);
+
+		$this->setView('/default/updateRecord.php', [
+			'domain' => $domain,
+			'id' => $response->id,
+			'type' => $response->type,
+			'recordData' => $response,
+		]);
+	}
+
+
+	public function updateRecordSubmit()
+	{
+		$this->validateRequest();
+		$this->validateRecord(TRUE);
+
+		$id = $this->domainValidator->get['id'];
+		$domain = $this->domainValidator->get['domain'];
+		$data = $this->dnsRecordValidator->post;
+
+		$response = $this->apiDnsService->updateRecord($id, $domain, $data);
+
+		if( isset($response->errors) && get_object_vars($response->errors) )  // Has to be cast to array for empty test.
+		{
+			$errors = [];
+			foreach ($response->errors as $key => $msg) $errors[$key] = join('<br>', $msg);
+
+			$this->sessionService->set(DnsRecordValidator::SESS_ERRORS_KEY, $errors);
+			$this->sessionService->set(DnsRecordValidator::SESS_POST_KEY, $data);
+
+			$basePath = $this->config->basePath;
+			$this->redirect("$basePath/default/update-record?domain=$domain&amp;id=$id");
+		}
+
+		if( $response->code < 300 ) $this->sessionService->setFlash('Záznam bol uložený.');
+		else $this->sessionService->setFlash('Pri ukladaní záznamu došlo k chybe.', 'danger');
+
+		$this->sessionService->set('a', $response);
+
+		$basePath = $this->config->basePath;
+		$this->redirect("$basePath/default/show-records?domain=$domain");
+
+
 	}
 
 
@@ -138,7 +192,7 @@ class DefaultController extends BaseController
 		}
 	}
 
-	protected function validateRecord()
+	protected function validateRecord($update = FALSE)
 	{
 		if( !$this->dnsRecordValidator->validate() )
 		{
@@ -147,8 +201,12 @@ class DefaultController extends BaseController
 			$this->sessionService->set(DnsRecordValidator::SESS_POST_KEY, $this->dnsRecordValidator->post);
 
 			$basePath = $this->config->basePath;
+			$id = $this->domainValidator->get['id'] ?? NULL;
 			$domain = $this->domainValidator->get['domain'];
-			$this->redirect("$basePath/default/create-record?domain=$domain");
+			$url = $update
+				? "$basePath/default/update-record?domain=$domain&id=$id"
+				: "$basePath/default/create-record?domain=$domain";
+			$this->redirect($url);
 		}
 	}
 }

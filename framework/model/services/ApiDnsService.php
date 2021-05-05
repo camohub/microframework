@@ -50,6 +50,24 @@ class ApiDnsService extends ApiBaseService
 	}
 
 
+	public function updateRecord($id, $domain, $data)
+	{
+		unset($data['type']);  // Update API does not allow change type.
+		$path = "/v1/user/self/zone/$domain/record/$id";
+
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, sprintf('%s%s', self::API_URL, $path));
+		$this->setBaseOptions($ch, $path, self::PUT, ['Content-Type:application/json']);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::PUT);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+		$response = curl_exec($ch);
+
+		return $this->createResponse($response, $ch);
+	}
+
+
 	public function deleteRecord($id, $domain)
 	{
 		$path = "/v1/user/self/zone/$domain/record/$id";
