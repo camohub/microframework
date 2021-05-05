@@ -20,7 +20,7 @@
 			<b>CNAME</b>: subdomain name <br>
 			<b>ANAME</b>: value: @ or empty string
 		</div>
-		<input type="text" name="name" class="form-control" value="<?php echo $post['name'] ?? '@' ?>">
+		<input type="text" name="name" class="form-control" value="<?php echo $post['name'] ?? '' ?>">
 	</div>
 
 	<div class="form-group">

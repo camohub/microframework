@@ -9,12 +9,16 @@ class DefaultController extends BaseController
 	/** @var  DomainValidator */
 	protected $domainValidator;
 
+	/** @var  DnsRecordValidator */
+	protected $dnsRecordValidator;
+
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->apiDnsService = $this->di->getService('ApiDnsService');
 		$this->domainValidator = $this->di->getService('DomainValidator');
+		$this->dnsRecordValidator = $this->di->getService('DnsRecordValidator');
 	}
 
 
@@ -73,6 +77,12 @@ class DefaultController extends BaseController
 	public function createRecordSubmit()
 	{
 		$this->validateRequest();
+		$this->validateRecord();
+
+		$domain = $this->domainValidator->get['domain'];
+		$data = $this->dnsRecordValidator->post;
+
+		$this->apiDnsService->createRecord($domain, $data);
 
 	}
 
@@ -108,6 +118,20 @@ class DefaultController extends BaseController
 		{
 			$this->sessionService->setFlash(join('<br>', $this->domainValidator->errors), 'danger');
 			$this->redirect($this->config->basePath);
+		}
+	}
+
+	protected function validateRecord()
+	{
+		if( !$this->dnsRecordValidator->validate() )
+		{
+			// Session for redirect
+			$this->sessionService->set(DnsRecordValidator::SESS_ERRORS_KEY, $this->dnsRecordValidator->errors);
+			$this->sessionService->set(DnsRecordValidator::SESS_POST_KEY, $this->dnsRecordValidator->post);
+
+			$basePath = $this->config->basePath;
+			$domain = $this->domainValidator->get['domain'];
+			$this->redirect("$basePath/default/create-record?domain=$domain");
 		}
 	}
 }

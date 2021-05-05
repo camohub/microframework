@@ -1,5 +1,12 @@
 <?php require_once(__DIR__ . '/../header.php'); ?>
 
+<?php
+
+	$formErrors = $sessionService->getAndForget(DnsRecordValidator::SESS_ERRORS_KEY);
+	$post = $sessionService->getAndForget(DnsRecordValidator::SESS_POST_KEY);
+
+?>
+
 
 <div class="container">
 	<div class="row pb-25">

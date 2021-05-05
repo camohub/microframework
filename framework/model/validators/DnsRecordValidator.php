@@ -4,6 +4,9 @@
 class DnsRecordValidator extends BaseValidator
 {
 
+	const SESS_ERRORS_KEY = self::class . '-errors';
+	const SESS_POST_KEY = self::class . '-post';
+
 
 	public function validate()
 	{
@@ -19,6 +22,8 @@ class DnsRecordValidator extends BaseValidator
 		$this->validatePriority();
 		$this->validateWeight();
 		$this->validatePort();
+
+		$this->setAllowedFieldsForType();
 
 		return $this->errors ? FALSE : TRUE;
 	}
@@ -160,6 +165,31 @@ class DnsRecordValidator extends BaseValidator
 		{
 			if( !preg_match('/^\d+$/', $port) ) $this->errors['port'] = "Port $port nieje validný pre typ $type záznamu.";
 		}
+	}
+
+
+	protected function setAllowedFieldsForType()
+	{
+		$newPost = [];
+		$newPost['type'] = $type = $this->post['type'];
+		$newPost['name'] = $this->post['name'];
+		$newPost['content'] = $this->post['content'];
+		$newPost['ttl'] = $this->post['content'];
+
+		foreach ($this->post as $p)
+		{
+			if( in_array($type, ['MX', 'SRV']) )
+			{
+				$newPost['prio'] = $this->post['prio'];
+			}
+			if( in_array($type, ['SRV']) )
+			{
+				$newPost['weight'] = $this->post['weight'];
+				$newPost['port'] = $this->post['port'];
+			}
+		}
+
+		$this->post = $newPost;
 	}
 
 }
