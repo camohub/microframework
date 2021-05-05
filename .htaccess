@@ -1,4 +1,5 @@
-RewriteEngine on
+RewriteBase /
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /WS/index.php?path=$1 [NC,L,QSA]
