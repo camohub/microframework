@@ -10,7 +10,7 @@
 		<div class="col">
 			<div class="mb-15"><b>Vyberte doménu</b></div>
 
-			<?php include(__DIR__ . '/../partials/formErrors.php') ?>
+			<?php include( __DIR__ . '/../partials/forms/formErrors.php' ) ?>
 
 			<?php foreach ($domains as $d): ?>
 				<div>
