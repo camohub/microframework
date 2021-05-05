@@ -36,9 +36,6 @@ class DefaultController extends BaseController
 	{
 		$this->validateRequest();
 
-		dump($this->sessionService->getAndForget('a'));
-		dump($this->sessionService->getAndForget('b'));
-
 		$domain = $this->domainValidator->get['domain'];
 
 		$response = $this->apiDnsService->getAllRecords($domain);
@@ -48,22 +45,6 @@ class DefaultController extends BaseController
 			'response' => $response
 		]);
 	}
-
-
-	/*public function showOneRecord()
-	{
-		$this->validateRequest();
-
-		$domain = $this->domainValidator->get['domain'];
-		$id = $this->domainValidator->get['id'];
-
-		$response = $this->apiDnsService->getOneRecord($id, $domain);
-
-		$this->setView('/default/showOneRecord.php', [
-			'domain' => $domain,
-			'response' => $response
-		]);
-	}*/
 
 
 	public function createRecord()
@@ -113,7 +94,6 @@ class DefaultController extends BaseController
 		$this->validateRequest();
 
 		$domain = $this->domainValidator->get['domain'];
-		dump($_GET);
 		$id = $this->domainValidator->get['id'];
 
 		$response = $this->apiDnsService->getOneRecord($id, $domain);
