@@ -63,7 +63,7 @@ class DnsRecordValidator extends BaseValidator
 		}
 		elseif ( in_array($type, ['ANAME']) )
 		{
-			if ( $name !== '' || $name !== '@' ) $this->errors['name'] = "Názov $name nieje validný pre typ $type záznamu.";
+			if ( $name !== '' && $name !== '@' ) $this->errors['name'] = "Názov $name nieje validný pre typ $type záznamu.";
  		}
 	}
 
@@ -84,8 +84,8 @@ class DnsRecordValidator extends BaseValidator
 		// https://www.oreilly.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
 		// https://www.regular-expressions.info/ip.html
 		$regexpIPv4 = '/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/';
-		// https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch08s17.html
-		$regexpIPv6 = '/^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$/';
+		// https://ihateregex.io/expr/ipv6/
+		$regexpIPv6 = '/^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/';
 		// https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch08s15.html
 		$regexpDomain = '/^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-z]{2,}$/';
 
@@ -177,17 +177,14 @@ class DnsRecordValidator extends BaseValidator
 		$newPost['ttl'] = $this->post['ttl'];
 		$newPost['note'] = $this->post['note'];
 
-		foreach ($this->post as $post)
+		if( in_array($type, ['MX', 'SRV']) )
 		{
-			if( in_array($type, ['MX', 'SRV']) )
-			{
-				$newPost['prio'] = $post['prio'];
-			}
-			if( in_array($type, ['SRV']) )
-			{
-				$newPost['weight'] = $post['weight'];
-				$newPost['port'] = $post['port'];
-			}
+			$newPost['prio'] = $this->post['prio'];
+		}
+		if( in_array($type, ['SRV']) )
+		{
+			$newPost['weight'] = $this->post['weight'];
+			$newPost['port'] = $this->post['port'];
 		}
 
 		$this->post = $newPost;
