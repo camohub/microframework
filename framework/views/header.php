@@ -29,11 +29,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 top-menu">
-					<a href="<?php echo $basePath ?>">DNS záznamy</a>
+					<a href="<?php echo $basePath ?: '/' ?>">DNS záznamy</a>
 					<?php if( !$sessionService->get('login') ): ?>
-						<a href="<?php echo $basePath ?>/login">Prihlásenie</a>
+						<a href="<?php echo "$basePath/login" ?>">Prihlásenie</a>
 					<?php else: ?>
-						<a href="<?php echo $basePath ?>/logout">Odhlásiť</a>
+						<a href="<?php echo "$basePath/logout" ?>">Odhlásiť</a>
 					<?php endif ?>
 				</div>
 			</div>
