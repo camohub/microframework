@@ -67,7 +67,7 @@ class Application
 		$path = explode('?', $path)[0];  // Dont waste time with query string
 		$path = trim($path, '/');
 		$path = explode('/', $path);
-		array_shift($path);  //  Remove directory name from path
+		if( "/$path[0]" == $this->config->basePath ) array_shift($path);  //  Remove directory name from path
 		$path = join('/', $path);
 
 		return $path;
