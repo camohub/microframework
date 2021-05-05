@@ -39,7 +39,9 @@ class BaseController
 
 	protected function redirect($location, $code = 0)
 	{
-		header('Location: ' . $location, $code);
+		$url = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+		$url .= $_SERVER['HTTP_HOST'] . $location;
+		header("Location: $url", $code);
 		exit();
 	}
 
