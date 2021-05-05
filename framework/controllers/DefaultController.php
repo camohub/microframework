@@ -82,8 +82,12 @@ class DefaultController extends BaseController
 		$domain = $this->domainValidator->get['domain'];
 		$data = $this->dnsRecordValidator->post;
 
-		$this->apiDnsService->createRecord($domain, $data);
+		$result = $this->apiDnsService->createRecord($domain, $data);
+		$this->sessionService->set('createRecordResult', $result);
 
+		$basePath = $this->config->basePath;
+
+		$this->redirect("$basePath/default/show-records?domain=$domain");
 	}
 
 

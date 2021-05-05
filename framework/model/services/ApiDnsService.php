@@ -44,9 +44,8 @@ class ApiDnsService extends ApiBaseService
 
 		curl_setopt($ch, CURLOPT_URL, sprintf('%s%s', self::API_URL, $path));
 
-		$this->setBaseOptions($ch, $path, self::POST);
-
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		$this->setBaseOptions($ch, $path, self::POST, ['Content-Type:application/json']);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
 		$response = curl_exec($ch);
 

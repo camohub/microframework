@@ -34,7 +34,7 @@ class ApiBaseService
 	}
 
 
-	protected function setBaseOptions( &$ch, $path, $method = self::GET, $query = '' )
+	protected function setBaseOptions( &$ch, $path, $method = self::GET, $headers = [] )
 	{
 		$time = time();
 		$apiKey = $this->config->apiKey;
@@ -45,9 +45,8 @@ class ApiBaseService
 		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($ch, CURLOPT_USERPWD, $apiKey.':'.$signature);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			'Date: ' . gmdate('Ymd\THis\Z', $time),
-		]);
+		$headers[] = 'Date: ' . gmdate('Ymd\THis\Z', $time);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 		// localhost ssl check off
 		if( !$this->config->production ) curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	}

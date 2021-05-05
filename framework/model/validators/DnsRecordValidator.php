@@ -174,18 +174,19 @@ class DnsRecordValidator extends BaseValidator
 		$newPost['type'] = $type = $this->post['type'];
 		$newPost['name'] = $this->post['name'];
 		$newPost['content'] = $this->post['content'];
-		$newPost['ttl'] = $this->post['content'];
+		$newPost['ttl'] = $this->post['ttl'];
+		$newPost['note'] = $this->post['note'];
 
-		foreach ($this->post as $p)
+		foreach ($this->post as $post)
 		{
 			if( in_array($type, ['MX', 'SRV']) )
 			{
-				$newPost['prio'] = $this->post['prio'];
+				$newPost['prio'] = $post['prio'];
 			}
 			if( in_array($type, ['SRV']) )
 			{
-				$newPost['weight'] = $this->post['weight'];
-				$newPost['port'] = $this->post['port'];
+				$newPost['weight'] = $post['weight'];
+				$newPost['port'] = $post['port'];
 			}
 		}
 
