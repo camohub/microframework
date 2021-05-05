@@ -8,6 +8,8 @@ class Router
 		'' => 'DefaultController@index',
 		'default/show-records' => 'DefaultController@showRecords',
 		'default/show-record' => 'DefaultController@showOneRecord',
+		'default/create-record' => 'DefaultController@createRecord',
+		'default/create-record-submit' => 'DefaultController@createRecordSubmit',
 		'default/delete-record' => 'DefaultController@deleteRecord',
 		'login' => 'LoginController@index',
 		'login/submit' => 'LoginController@submit',

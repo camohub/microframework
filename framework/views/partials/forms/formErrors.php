@@ -1,6 +1,6 @@
 <?php
 
-if( $validator->errors )
+if( !empty($validator->errors) )
 {
 	echo '<div class="alert alert-danger mb-15">';
 	foreach ($validator->errors as $error) echo '<div>' . $error . '</div>';

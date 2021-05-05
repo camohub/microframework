@@ -62,6 +62,18 @@ class DefaultController extends BaseController
 	{
 		$this->validateRequest();
 
+		$domain = $this->domainValidator->get['domain'];
+
+		$this->setView('/default/createRecord.php', [
+			'domain' => $domain,
+		]);
+	}
+
+
+	public function createRecordSubmit()
+	{
+		$this->validateRequest();
+
 	}
 
 

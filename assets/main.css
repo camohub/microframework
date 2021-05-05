@@ -38,6 +38,18 @@ label {
 	color: #fff !important;
 }
 
+.help {
+	cursor: pointer;
+}
+
+.help-content {
+	display: none;
+}
+
+#createRecordForm .specialInput {
+	display: none;
+}
+
 .pb-50 { padding-bottom: 50px !important; }
 .pb-25 { padding-bottom: 25px !important; }
 
@@ -45,3 +57,5 @@ label {
 
 .mb-15 { margin-bottom: 15px !important; }
 .mb-5 { margin-bottom: 5px !important; }
+
+.material-icons.xs-20 { font-size: 24px; }

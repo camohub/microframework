@@ -3,7 +3,10 @@
 
 <div class="container">
 	<div class="row pb-25">
-		<h2 class="col-12">DNS záznamy - <?php echo $domain ?></h2>
+		<h2 class="col-12">
+			DNS záznamy - <?php echo $domain ?>
+			<a href="<?php echo "$basePath/default/create-record?domain=$domain" ?>" class="btn btn-primary float-right">Nový záznam</a>
+		</h2>
 	</div>
 
 	<?php if( $response->code > 299 ): ?>
