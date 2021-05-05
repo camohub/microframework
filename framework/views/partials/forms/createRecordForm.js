@@ -15,11 +15,11 @@ $(function() {
 			createRecordForm.find(selector).slideDown();
 		}
 
-		if(type == 'weight')
+		if(type == 'srv')
 		{
 			var selector = '.' + type + '-js';
 			createRecordForm.find(selector).slideDown();
 		}
 	});
 
-})
+});

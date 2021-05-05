@@ -11,8 +11,8 @@ class DIContainer
 	 * Other services are included only if needed.
 	 */
 	protected $baseServices = [
-		'/../helpers.php',
-		'/baseConfig.php',
+		'/../Helpers.php',
+		'/BaseConfig.php',
 		'/controllers/BaseController.php',
 		'/model/validators/BaseValidator.php',
 		'/model/services/ApiBaseService.php',
@@ -24,8 +24,8 @@ class DIContainer
 	 */
 	protected $services = [
 		// App
-		'Router' => '/router.php',
-		'Config' => '/../config.php',
+		'Router' => '/Router.php',
+		'Config' => '/../Config.php',
 
 		// Controllers
 		'DefaultController' => '/controllers/DefaultController.php',
@@ -37,6 +37,7 @@ class DIContainer
 		// Model validators
 		'LoginValidator' => '/model/validators/LoginValidator.php',
 		'DomainValidator' => '/model/validators/DomainValidator.php',
+		'DnsRecordValidator' => '/model/validators/DnsRecordValidator.php',
 
 		// Model API
 		'ApiZonesService' => '/model/services/ApiZonesService.php',

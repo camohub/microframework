@@ -1,14 +1,14 @@
 
-<form action="<?php echo $basePath ?>/default/create-a-record-submit" method="post" id="createRecordForm" class="col-12 offset-md-3 col-md-6">
+<form action="<?php echo "$basePath/default/create-record-submit?domain=$domain" ?>" method="post" id="createRecordForm" class="col-12 offset-md-3 col-md-6">
 
 	<?php include(__DIR__ . '/formErrors.php') ?>
 
 	<div class="form-group">
 		<label for="type">Typ</label>
 		<select type="type" name="type" id="typeId" class="form-control">
-			<option>Typ</option>
+			<option></option>
 			<?php foreach(ApiDnsService::RECORD_TYPES as $type): ?>
-				<option name="type" value="<?php echo $post['type'] ?? '@' ?>"><?php echo $type ?></option>
+				<option name="type" value="<?php echo $type ?>"><?php echo $type ?></option>
 			<?php endforeach; ?>
 		</select>
 	</div>
@@ -16,8 +16,7 @@
 	<div class="form-group">
 		<label for="name">Názov</label> <span class="material-icons float-right help">help</span>
 		<div class="help-content help mb-5">
-			<b>A, AAAA, MX, NS, TXT</b>: subdomain name or @ if you don't want subdomain <br>
-			<b>SRV</b>: subdomain name or @ if you don't want subdomain <br>
+			<b>A, AAAA, MX, NS, TXT, SRV</b>: subdomain name or @ if you don't want subdomain <br>
 			<b>CNAME</b>: subdomain name <br>
 			<b>ANAME</b>: value: @ or empty string
 		</div>

@@ -1,3 +1,6 @@
+<?php
+	$formErrors = $validator->errors ?? NULL;
+?>
 
 <form action="<?php echo $basePath ?>/login/submit" method="post" class="col-12 offset-md-3 col-md-6">
 
