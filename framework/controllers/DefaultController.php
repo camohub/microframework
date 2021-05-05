@@ -66,6 +66,8 @@ class DefaultController extends BaseController
 	{
 		$this->validateRequest();
 
+		//dump($this->sessionService->getAndForget('a'));
+		//dump($this->sessionService->getAndForget('b'));
 		$domain = $this->domainValidator->get['domain'];
 
 		$this->setView('/default/createRecord.php', [
@@ -82,11 +84,26 @@ class DefaultController extends BaseController
 		$domain = $this->domainValidator->get['domain'];
 		$data = $this->dnsRecordValidator->post;
 
-		$result = $this->apiDnsService->createRecord($domain, $data);
-		$this->sessionService->set('createRecordResult', $result);
+		$response = $this->apiDnsService->createRecord($domain, $data);
+		//$this->sessionService->set('a', $response);
+		//$this->sessionService->set('b', $data);
+
+		if( isset($response->errors) && get_object_vars($response->errors) )  // Has to be cast to array for empty test.
+		{
+			$errors = [];
+			foreach ($response->errors as $key => $msg) $errors[$key] = join('<br>', $msg);
+
+			$this->sessionService->set(DnsRecordValidator::SESS_ERRORS_KEY, $errors);
+			$this->sessionService->set(DnsRecordValidator::SESS_POST_KEY, $data);
+
+			$basePath = $this->config->basePath;
+			$this->redirect("$basePath/default/create-record?domain=$domain");
+		}
+
+		if( $response->code < 300 ) $this->sessionService->setFlash('Záznam bol uložený.');
+		else $this->sessionService->setFlash('Pri ukladaní záznamu došlo k chybe.', 'danger');
 
 		$basePath = $this->config->basePath;
-
 		$this->redirect("$basePath/default/show-records?domain=$domain");
 	}
 
@@ -94,10 +111,6 @@ class DefaultController extends BaseController
 	public function deleteRecord()
 	{
 		$this->validateRequest();
-
-		// TODO remove redirect
-		$this->sessionService->setFlash(join('<br>', ['aaaaaaaaaaaa', 'bbbbbbbbbbbbb']), 'danger');
-		$this->redirect($this->config->basePath);
 
 		$domain = $this->domainValidator->get['domain'];
 		$id = $this->domainValidator->get['id'];

@@ -50,6 +50,10 @@ label {
 	display: none;
 }
 
+#footer {
+	min-height: 80px;
+}
+
 .pb-50 { padding-bottom: 50px !important; }
 .pb-25 { padding-bottom: 25px !important; }
 
