@@ -10,5 +10,7 @@
 	<script>
 		<?php require_once(__DIR__ . '/../../assets/main.js'); ?>
 	</script>
+
+	<div id="footer"></div>
 </body>
 </html>
