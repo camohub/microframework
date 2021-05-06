@@ -127,7 +127,7 @@ class DefaultController extends BaseController
 			$this->sessionService->set(DnsRecordValidator::SESS_POST_KEY, $data);
 
 			$basePath = $this->config->basePath;
-			$this->redirect("$basePath/default/update-record?domain=$domain&amp;id=$id");
+			$this->redirect("$basePath/default/update-record?domain=$domain&id=$id");
 		}
 
 		if( $response->code < 300 ) $this->sessionService->setFlash('Záznam bol uložený.');
