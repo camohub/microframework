@@ -1,10 +1,6 @@
 $(function() {
 
 	var createRecordForm = $('#updateRecordForm');
-	var createRecordFormSpecialInputs = createRecordForm.find('.specialInput');
-
-
-	createRecordFormSpecialInputs.slideUp();
 
 	if(type == 'mx' || type == 'srv')
 	{

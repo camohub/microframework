@@ -46,7 +46,8 @@ label {
 	display: none;
 }
 
-#createRecordForm .specialInput {
+#createRecordForm .specialInput,
+#updateRecordForm .specialInput {
 	display: none;
 }
 
