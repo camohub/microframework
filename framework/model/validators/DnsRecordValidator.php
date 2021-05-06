@@ -48,7 +48,7 @@ class DnsRecordValidator extends BaseValidator
 		$name = $this->post['name'];
 		// https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch08s15.html
 		// https://www.geeksforgeeks.org/how-to-validate-a-domain-name-using-regular-expression/
-		$regexpDomainWithAt = '/^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)|@$/';
+		$regexpDomainWithAt = '/^(([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)|@)$/';
 		$regexpDomain = '/^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)$/';
 
 		if( in_array($type, ['A', 'AAAA', 'MX', 'NS', 'TXT', 'SRV']) )
