@@ -1,3 +1,20 @@
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+}
+
+#wrapper {
+	position: relative;
+	min-height: 100vh;
+}
+
+#content {
+	padding-bottom: 80px;    /* Footer height */
+}
+
 .header {
 	background-color: #222;
 	color: #fff;
@@ -52,8 +69,12 @@ label {
 }
 
 #footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	padding: 80px 15px 15px 15px;
 	min-height: 80px;
+	text-align: center;
 }
 
 .pb-50 { padding-bottom: 50px !important; }
